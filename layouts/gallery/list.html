@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+<!-- added from other hugo theme "console"-->
+
+<h1>{{ .Page.Title }}</h1>
+{{ .Content }}
+<div class="image-grid">
+    {{ range sort .Pages "Date" "desc" }}
+        {{ if and (isset .Params "image") .Params.image }}
+            <a href="{{ .Permalink }}" title="{{ .Title }}">
+            {{ $image := .Page.Resources.GetMatch .Params.image }}
+            {{ with $image }}
+                {{ $thumb := .Fill "240x240 Center" }}
+                <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" class="img-responsive">
+            {{end}}
+            </a>
+        {{ end }}
+    {{ end }}
+</div>
+{{ end }}

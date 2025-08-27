@@ -1,0 +1,25 @@
+{{- if .IsHome -}}
+    {{ site.Title }}
+
+<!--post titles-->
+{{- else if eq .Kind "page" | and (in .CurrentSection.Path "posts") -}}
+    {{ .Title }} | {{ site.Title }}
+{{- else if .IsSection | and (eq .Section "posts") -}}
+    Posts | {{ site.Title }}
+
+<!--gallery titles-->
+{{- else if eq .Kind "page" | and (in .CurrentSection.Path "gallery") -}}
+    {{ .Title }} | {{ site.Title }}
+{{- else if eq .RelPermalink "/gallery/" -}}
+    Gallery | {{ site.Title }}
+
+<!--other titles-->
+{{- else if eq .RelPermalink "/links/" -}}
+    Links | {{ site.Title }}
+{{- else if eq .RelPermalink "/contact/" -}}
+    Contact | {{ site.Title }}
+{{- else if eq .RelPermalink "/search/" -}}
+    Search | {{ site.Title }}
+{{- else -}}
+    404 | {{ site.Title }}
+{{- end -}}
